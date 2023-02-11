@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 
 public class DbFunctions {
+
+    //  create a connection to database first
+
     public Connection connectToDb(String dbname, String user, String pass) {
         Connection conn = null;
         try {
@@ -21,6 +24,9 @@ public class DbFunctions {
         return conn;
     }
 
+
+    //  create a table
+
     public void createTable(Connection conn, String tableName){
         Statement statement;
         try{
@@ -31,6 +37,21 @@ public class DbFunctions {
         }
         catch(Exception e){
 
+        }
+    }
+
+    //  insert row
+
+    public void insertRow(Connection conn,String tableName, String name,String address){
+        Statement statement;
+        try{
+        String query=String.format("insert into %s(name,address) values('%s','%s');",tableName,name,address);
+        statement=conn.createStatement();
+        statement.executeUpdate(query);
+            System.out.println("Row Inserted");
+        }
+        catch(Exception e){
+            System.out.println(e);
         }
     }
 }
