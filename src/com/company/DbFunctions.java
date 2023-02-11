@@ -2,6 +2,7 @@ package com.company;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class DbFunctions {
@@ -49,6 +50,28 @@ public class DbFunctions {
         statement=conn.createStatement();
         statement.executeUpdate(query);
             System.out.println("Row Inserted");
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+
+    //  read data
+
+    public void readData(Connection conn,String tableName){
+        Statement statement;
+        ResultSet resultSet=null;
+        try{
+            String query=String.format("select * from "+tableName);
+            statement=conn.createStatement();
+            resultSet = statement.executeQuery(query);
+
+            while(resultSet.next()){
+                System.out.print(resultSet.getString("empId")+" ");
+                System.out.print(resultSet.getString("name")+" ");
+                System.out.println(resultSet.getString("address")+" ");
+
+            }
         }
         catch(Exception e){
             System.out.println(e);
