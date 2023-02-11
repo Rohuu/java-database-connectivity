@@ -20,4 +20,17 @@ public class DbFunctions {
         }
         return conn;
     }
+
+    public void createTable(Connection conn, String tableName){
+        Statement statement;
+        try{
+            String query="create table "+tableName+"(empId SERIAL,name varchar(200),address varchar(200),primary key(empId));";
+            statement=conn.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Table Created");
+        }
+        catch(Exception e){
+
+        }
+    }
 }
